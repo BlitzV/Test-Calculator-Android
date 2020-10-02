@@ -8,6 +8,6 @@ import retrofit2.http.GET;
 public interface EndPoints {
 
     @GET("get-products")
-    Observable<List<Datum>> CryptoInfo();
+    Observable<ApiModel> CryptoInfo();
 
 }

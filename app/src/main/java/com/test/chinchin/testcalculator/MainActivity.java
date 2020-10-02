@@ -7,10 +7,14 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 
+import com.google.android.material.textfield.TextInputLayout;
 import com.test.chinchin.testcalculator.adapters.SpinnerAdapter;
 import com.test.chinchin.testcalculator.helpers.DialogsHelper;
+import com.test.chinchin.testcalculator.helpers.FunctionsHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,13 +34,23 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.spinner)
     AppCompatSpinner spinner;
 
+    @BindView(R.id.quantity)
+    EditText quantity;
+
+    @BindView(R.id.error_quantity)
+    TextInputLayout errorQuantity;
+
+    @BindView(R.id.calculate)
+    Button Calculate;
+
     @Inject
     EndPoints RetrofitProvider;
 
     private Disposable subscription;
-    private List<Datum> apiModelsReceiver = new ArrayList<>();
+    private ApiModel modelObject = FunctionsHelper.MockDataApiModel();
     private SpinnerAdapter spinnerAdapterData;
     private int pos = 0;
+    private boolean isBadResponse = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,35 +60,9 @@ public class MainActivity extends AppCompatActivity {
 
         App.getAppComponent().inject(this);
 
-        subscription = null;
-        subscription = RetrofitProvider.CryptoInfo().subscribeOn(Schedulers.io())
-                .subscribeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(new DisposableObserver<List<Datum>>() {
-                    @Override
-                    public void onNext(List<Datum> apiModels) {
-                        apiModelsReceiver = apiModels;
-                        SpinnerPoblate(apiModelsReceiver);
-                    }
+        getRemoteData();
 
-                    //FIXME obtener lista de datos
-                    @Override
-                    public void onError(Throwable e) {
-                        DialogsHelper.ShowDialogSimpleOKButton(MainActivity.this, getString(R.string.error_remote),
-                                getString(R.string.message_error_remote_data), new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        dialog.dismiss();
-                                    }
-                                }).show();
-                    }
-
-                    @Override
-                    public void onComplete() {
-
-                    }
-                });
-
-        spinnerAdapterData = new SpinnerAdapter(this, apiModelsReceiver);
+        spinnerAdapterData = new SpinnerAdapter(this, modelObject.getData());
         spinner.setAdapter(spinnerAdapterData);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -110,9 +98,55 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
     public void SpinnerPoblate(List<Datum> apiModelReceiver){
         if(apiModelReceiver!=null){
-            apiModelReceiver.get(pos).getAn();
+            this.getRemoteData().getData().clear();
+            this.getRemoteData().setData(apiModelReceiver);
         }
     }
+
+    public void ErrorApiResponse(boolean value){
+        if(value){
+            DialogsHelper.ShowDialogSimpleOKButton(MainActivity.this, getString(R.string.error_remote),
+                    getString(R.string.message_error_remote_data), new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    }).show();
+        }
+    }
+
+    public ApiModel getRemoteData(){
+        subscription = null;
+        subscription = RetrofitProvider.CryptoInfo().subscribeOn(Schedulers.io())
+                .subscribeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new DisposableObserver<ApiModel>() {
+                    @Override
+                    public void onNext(ApiModel apiModels) {
+                        modelObject.setData(apiModels.getData());
+                        SpinnerPoblate(modelObject.getData());
+                    }
+
+
+                    @Override
+                    public void onError(Throwable e) {
+                        e.getStackTrace();
+                        modelObject = FunctionsHelper.MockDataApiModel();
+                        SpinnerPoblate(modelObject.getData());
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+        return modelObject;
+    }
+
 }

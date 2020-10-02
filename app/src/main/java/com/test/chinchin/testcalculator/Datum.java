@@ -76,6 +76,32 @@ public class Datum {
     @Expose
     private Boolean etf;
 
+    public Datum(String s, String st, String b, String q, String ba, String qa, Double i, Double ts, String an, String qn, Double o, Double h, Double l, Double c, Double v, Double qv, Integer y, Double as, String pm, String pn, Integer cs, List<String> tags, Boolean etf) {
+        this.s = s;
+        this.st = st;
+        this.b = b;
+        this.q = q;
+        this.ba = ba;
+        this.qa = qa;
+        this.i = i;
+        this.ts = ts;
+        this.an = an;
+        this.qn = qn;
+        this.o = o;
+        this.h = h;
+        this.l = l;
+        this.c = c;
+        this.v = v;
+        this.qv = qv;
+        this.y = y;
+        this.as = as;
+        this.pm = pm;
+        this.pn = pn;
+        this.cs = cs;
+        this.tags = tags;
+        this.etf = etf;
+    }
+
     public String getS() {
         return s;
     }

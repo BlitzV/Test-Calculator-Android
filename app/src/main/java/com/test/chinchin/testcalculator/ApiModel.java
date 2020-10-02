@@ -22,6 +22,18 @@ public class ApiModel {
     @Expose
     private Boolean success;
 
+    public ApiModel(String code, Object message, Object messageDetail, List<Datum> data, Boolean success) {
+        this.code = code;
+        this.message = message;
+        this.messageDetail = messageDetail;
+        this.data = data;
+        this.success = success;
+    }
+
+    public ApiModel(List<Datum> data) {
+        this.data = data;
+    }
+
     public String getCode() {
         return code;
     }

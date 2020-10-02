@@ -4,7 +4,12 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Patterns;
 
+import com.test.chinchin.testcalculator.ApiModel;
+import com.test.chinchin.testcalculator.Datum;
+
 import java.text.NumberFormat;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Pattern;
 
 import static com.test.chinchin.testcalculator.helpers.ConstantsHelper.BUNDLE_PASSWORD_COD_ERROR;
@@ -94,5 +99,21 @@ public class FunctionsHelper {
             bundle.putBoolean(BUNDLE_PASSWORD_ERROR, true);
         }
         return bundle;
+    }
+
+    public static ApiModel MockDataApiModel(){
+        ApiModel apiModel = new ApiModel("",null,null,MockDatum(),false);
+        return apiModel;
+    }
+
+    public static List<Datum> MockDatum() {
+        Datum datum = new Datum("","","","","","",null,null,"USD",""
+                ,null,null,null,null,null,null,0,null,"","",0,null,false);
+
+        List<Datum> list = new ArrayList<>();
+
+        list.add(datum);
+        list.add(datum);
+        return list;
     }
 }

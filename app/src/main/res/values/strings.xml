@@ -27,4 +27,5 @@
     <string name="insert_information">Inserte el monto a calcular</string>
     <string name="error_remote">Error al recibir data</string>
     <string name="message_error_remote_data">No se han podido obtener los datos</string>
+    <string name="insert_value">Inserte la cantidad a calcular</string>
 </resources>

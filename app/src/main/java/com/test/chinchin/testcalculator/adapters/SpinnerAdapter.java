@@ -1,6 +1,7 @@
 package com.test.chinchin.testcalculator.adapters;
 
 import android.content.Context;
+import android.content.pm.ApplicationInfo;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
