@@ -1,3 +1,26 @@
 <resources>
     <string name="app_name">TestCalculator</string>
+
+    <string name="btn_login">Ingresar</string>
+    <string name="dialog_cancel">Cancelar</string>
+    <string name="dialog_ok">Aceptar</string>
+    <string name="password">Contraseña</string>
+    <string name="user">Correo</string>
+
+    <!--error messages-->
+    <string name="error_field_required">Campo requerido</string>
+    <string name="error_invalid_email">Correo inválido</string>
+    <string name="error_not_find_special_caracter">Debe contener al menos un carácter especial</string>
+    <string name="error_not_find_number">Debe contener al menos un número</string>
+    <string name="error_not_find_lowercase_caracter">Debe contener al menos una letra</string>
+    <string name="error_not_find_uppercase_caracter">Debe contener al menos una letra en mayúscula</string>
+    <string name="error_too_short_password">Debe contener entre 8 y 15 caracteres</string>
+    <string name="error_email_cant_begin_withspecialcaracter">El correo no puede iniciar con caracteres especiales</string>
+    <string name="error_spaces">no puede contener espacios entre caracteres</string>
+    <string name="error_triplicate_caracter">No se pueden repetir 3 caracteres seguidos</string>
+    <string name="error_init_empty">No puede iniciar con espacios en blanco</string>
+    <string name="error_init_number">No puede iniciar con un número</string>
+    <string name="error_final_empty">No puede tener espacios en blanco al final</string>
+    <string name="error_save">Error al guardar datos</string>
+    <string name="try_again">Intente nuevamente</string>
 </resources>

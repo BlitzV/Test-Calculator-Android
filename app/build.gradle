@@ -18,7 +18,23 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+
+            buildConfigField 'String', 'SECURITY', SECURITY_TOKEN
         }
+
+        debug {
+            debuggable true
+            applicationIdSuffix '.debug'
+            versionNameSuffix '-debug'
+
+            buildConfigField 'String', 'SECURITY', SECURITY_TOKEN
+
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 }
 
@@ -28,6 +44,7 @@ ext {
     constraintlayoutVersion = '2.0.1'
     daggerVersion = '2.25.2'
     lifecycleVersion = '2.2.0'
+    butterknifeVersion = '10.0.0'
     retrofitVersion = '2.3.0'
     gsonVersion = '2.8.6'
     loggingInterceptorVersion = '4.2.2'
@@ -45,6 +62,10 @@ dependencies {
 
     //    APPCOMPAT
     implementation "androidx.appcompat:appcompat:$appcompatVersion"
+
+    //    BUTTERKNIFE
+    implementation "com.jakewharton:butterknife:$butterknifeVersion"
+    annotationProcessor "com.jakewharton:butterknife-compiler:$butterknifeVersion"
 
 //    CONSTRAINT LAYOUT
     implementation "androidx.constraintlayout:constraintlayout:$constraintlayoutVersion"
