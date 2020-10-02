@@ -20,6 +20,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
 
             buildConfigField 'String', 'SECURITY', SECURITY_TOKEN
+            buildConfigField 'String', 'ENDPOINT', ENDPOINT_URL
         }
 
         debug {
@@ -28,6 +29,7 @@ android {
             versionNameSuffix '-debug'
 
             buildConfigField 'String', 'SECURITY', SECURITY_TOKEN
+            buildConfigField 'String', 'ENDPOINT', ENDPOINT_URL
 
         }
     }
