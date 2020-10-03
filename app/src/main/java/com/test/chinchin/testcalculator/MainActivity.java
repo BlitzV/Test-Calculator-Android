@@ -41,28 +41,42 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.spinner)
     AppCompatSpinner spinner;
 
+    @BindView(R.id.txtTotal)
+    TextView txtTotal;
+
     @BindView(R.id.button0)
     TextView button0;
+
     @BindView(R.id.button1)
     TextView button1;
+
     @BindView(R.id.button2)
     TextView button2;
+
     @BindView(R.id.button3)
     TextView button3;
+
     @BindView(R.id.button4)
     TextView button4;
+
     @BindView(R.id.button5)
     TextView button5;
+
     @BindView(R.id.button6)
     TextView button6;
+
     @BindView(R.id.button7)
     TextView button7;
+
     @BindView(R.id.button8)
     TextView button8;
+
     @BindView(R.id.button9)
     TextView button9;
+
     @BindView(R.id.buttonClear)
     TextView buttonClear;
+
     @BindView(R.id.buttonDot)
     TextView buttonDot;
 
@@ -90,6 +104,8 @@ public class MainActivity extends AppCompatActivity {
         View.OnClickListener numberListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                Calculate.setEnabled(false);
 
                 TextView button = (TextView) v;
 
@@ -156,14 +172,27 @@ public class MainActivity extends AppCompatActivity {
 
                     }
 
-                    CaptureQuantity();
                 }
+
+                CaptureQuantity();
+
             }
         });
     }
 
     private void CaptureQuantity() {
         Toast.makeText(this, "si", Toast.LENGTH_SHORT).show();
+
+        if (quantity != null && quantity.length() > 0) {
+
+            txtTotal.setText(quantity);
+
+            Calculate.setEnabled(true);
+
+        } else {
+            txtTotal.setText(null);
+            Calculate.setEnabled(false);
+        }
     }
 
     @Override
@@ -189,6 +218,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        Calculate.setEnabled(false);
         SpinnerPoblate();
     }
 
