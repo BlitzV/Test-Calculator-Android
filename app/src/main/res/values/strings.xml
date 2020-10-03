@@ -25,7 +25,8 @@
     <string name="try_again">Intente nuevamente</string>
     <string name="action_calculate">calcular</string>
     <string name="insert_information">Inserte el monto a calcular</string>
-    <string name="error_remote">Error al recibir data</string>
+    <string name="error_remote">Error al recibir data, presione aceptar para intentar nuevamente</string>
     <string name="message_error_remote_data">No se han podido obtener los datos</string>
     <string name="insert_value">Inserte la cantidad a calcular</string>
+    <string name="error_getting_data">No se pudo obtener los datos, se intentara nuevamente</string>
 </resources>

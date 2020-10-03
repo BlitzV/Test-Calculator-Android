@@ -56,7 +56,7 @@ public class Datum {
     private Double qv;
     @SerializedName("y")
     @Expose
-    private Integer y;
+    private Long y;
     @SerializedName("as")
     @Expose
     private Double as;
@@ -68,7 +68,7 @@ public class Datum {
     private String pn;
     @SerializedName("cs")
     @Expose
-    private Integer cs;
+    private Long cs;
     @SerializedName("tags")
     @Expose
     private List<String> tags = null;
@@ -76,7 +76,7 @@ public class Datum {
     @Expose
     private Boolean etf;
 
-    public Datum(String s, String st, String b, String q, String ba, String qa, Double i, Double ts, String an, String qn, Double o, Double h, Double l, Double c, Double v, Double qv, Integer y, Double as, String pm, String pn, Integer cs, List<String> tags, Boolean etf) {
+    public Datum(String s, String st, String b, String q, String ba, String qa, Double i, Double ts, String an, String qn, Double o, Double h, Double l, Double c, Double v, Double qv, Long y, Double as, String pm, String pn, Long cs, List<String> tags, Boolean etf) {
         this.s = s;
         this.st = st;
         this.b = b;
@@ -230,11 +230,11 @@ public class Datum {
         this.qv = qv;
     }
 
-    public Integer getY() {
+    public Long getY() {
         return y;
     }
 
-    public void setY(Integer y) {
+    public void setY(Long y) {
         this.y = y;
     }
 
@@ -262,11 +262,11 @@ public class Datum {
         this.pn = pn;
     }
 
-    public Integer getCs() {
+    public Long getCs() {
         return cs;
     }
 
-    public void setCs(Integer cs) {
+    public void setCs(Long cs) {
         this.cs = cs;
     }
 

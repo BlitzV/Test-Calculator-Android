@@ -14,11 +14,13 @@ import androidx.annotation.Nullable;
 import com.test.chinchin.testcalculator.ApiModel;
 import com.test.chinchin.testcalculator.Datum;
 import com.test.chinchin.testcalculator.R;
+import com.test.chinchin.testcalculator.helpers.FunctionsHelper;
 
 import java.util.List;
 
 public class SpinnerAdapter extends ArrayAdapter {
 
+    private ApiModel ApiObject;
     private List<Datum> apiModels;
     private Context context;
     private int resource;
@@ -46,9 +48,13 @@ public class SpinnerAdapter extends ArrayAdapter {
     private View createItemView(int position, View convertView, ViewGroup parent) {
         final View view = inflater.inflate(resource, parent, false);
 
+        ApiObject = FunctionsHelper.MockDataApiModel();
+
+        ApiObject.setData(apiModels);
+
         TextView txtOperator = view.findViewById(R.id.txtOperator);
 
-        txtOperator.setText(apiModels.get(position).getAn());
+        txtOperator.setText(ApiObject.getData().get(position).getAn());
 
         return view;
     }
