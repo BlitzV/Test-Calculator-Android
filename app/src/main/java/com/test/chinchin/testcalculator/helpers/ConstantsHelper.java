@@ -9,6 +9,7 @@ public class ConstantsHelper {
     public static final String USD = "USD";
     public static final String PTR = "PTR";
     public static final String BS = "BS";
+    public static final String SAVE_LIST_QR = "QR";
 
 
 }

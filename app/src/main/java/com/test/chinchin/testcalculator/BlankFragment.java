@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,9 +24,14 @@ import com.google.zxing.common.BitMatrix;
 import com.test.chinchin.testcalculator.helpers.ConstantsHelper;
 import com.test.chinchin.testcalculator.preferences.PreferencesHelper;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static com.test.chinchin.testcalculator.helpers.ConstantsHelper.SAVE_LIST_QR;
 import static com.test.chinchin.testcalculator.helpers.ConstantsHelper.USD;
 import static com.test.chinchin.testcalculator.helpers.FunctionsHelper.DecimalFormat;
 import static com.test.chinchin.testcalculator.helpers.FunctionsHelper.encodeAsBitmap;
@@ -121,7 +127,7 @@ public class BlankFragment extends BottomSheetDialogFragment {
     private void CalculateValues() {
         if(mParam1!=null && mParam2 > -1){
 
-            int valueToCalulate = Integer.parseInt(mParam1);
+            long valueToCalulate = Integer.parseInt(mParam1);
 
             title_fragment.setText(mParam1.concat(" ").concat(USD));
 
@@ -138,10 +144,11 @@ public class BlankFragment extends BottomSheetDialogFragment {
 
             txtCurrencyValue2.setText(BS);
 
-            currencyModel = new CurrencyModel(ConstantsHelper.PTR, ConstantsHelper.BS, PTR, BS);
+            currencyModel = new CurrencyModel(mParam1.concat(" ").concat(USD),ConstantsHelper.PTR, ConstantsHelper.BS, PTR, BS);
 
             try {
                 QrImage.setImageBitmap(encodeAsBitmap(new Gson().toJson(currencyModel)));
+
             } catch (WriterException e) {
                 e.printStackTrace();
             }

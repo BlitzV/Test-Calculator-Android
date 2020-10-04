@@ -2,16 +2,26 @@ package com.test.chinchin.testcalculator;
 
 public class CurrencyModel {
 
+    private String InitValue;
     private String PTR;
     private String BS;
     private String currencyPTR;
     private String currencyBS;
 
-    public CurrencyModel(String PTR, String BS, String currencyPTR, String currencyBS) {
+    public CurrencyModel(String initValue, String PTR, String BS, String currencyPTR, String currencyBS) {
+        this.InitValue = initValue;
         this.PTR = PTR;
         this.BS = BS;
         this.currencyPTR = currencyPTR;
         this.currencyBS = currencyBS;
+    }
+
+    public String getInitValue() {
+        return InitValue;
+    }
+
+    public void setInitValue(String initValue) {
+        InitValue = initValue;
     }
 
     public String getPTR() {

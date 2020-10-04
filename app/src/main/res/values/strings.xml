@@ -37,4 +37,5 @@
     <string name="logout">Cerrar sesion</string>
     <string name="error_permission">error de permiso</string>
     <string name="mensaje_permission">Debe aceptar el permiso para continuar con esta accion</string>
+    <string name="action_recalculate">Recalcular</string>
 </resources>
