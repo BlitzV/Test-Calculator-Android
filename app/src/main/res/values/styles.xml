@@ -15,4 +15,13 @@
 
     </style>
 
+    <!--BOTTOM FRAGMENT STYLE-->
+    <style name="BackgroundBottomFragmentTransparentTheme" parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/BackgroundBottomFragmentTransparent</item>
+    </style>
+
+    <style name="BackgroundBottomFragmentTransparent" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+
 </resources>

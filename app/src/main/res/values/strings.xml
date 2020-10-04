@@ -23,4 +23,14 @@
     <string name="error_final_empty">No puede tener espacios en blanco al final</string>
     <string name="error_save">Error al guardar datos</string>
     <string name="try_again">Intente nuevamente</string>
+    <string name="action_calculate">calcular</string>
+    <string name="insert_information">Inserte el monto a calcular</string>
+    <string name="error_remote">Error al recibir data, presione aceptar para intentar nuevamente</string>
+    <string name="message_error_remote_data">No se han podido obtener los datos</string>
+    <string name="insert_value">Inserte la cantidad a calcular</string>
+    <string name="error_getting_data">No se pudo obtener los datos, se intentara nuevamente</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="operation">Currency type</string>
+    <string name="null_value">-</string>
 </resources>

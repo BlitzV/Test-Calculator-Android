@@ -10,9 +10,17 @@ import static com.test.chinchin.testcalculator.helpers.ConstantsHelper.SAVE_USER
 
 public class App extends Application {
 
+    private static AppComponent component;
+
     @Override
     public void onCreate() {
         super.onCreate();
+
+        component = DaggerAppComponent.builder()
+                .appModule(new AppModule(this))
+                .retrofitModule(new RetrofitModule())
+                .build();
+
 
         if(PreferencesHelper.GetStringValue(this,SAVE_USER)!=null){
             Intent intent = new Intent(App.this, MainActivity.class);
@@ -24,4 +32,9 @@ public class App extends Application {
             startActivity(intent);
         }
     }
+
+    public static AppComponent getAppComponent() {
+        return component;
+    }
+
 }

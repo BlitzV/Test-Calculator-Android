@@ -20,6 +20,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
 
             buildConfigField 'String', 'SECURITY', SECURITY_TOKEN
+            buildConfigField 'String', 'ENDPOINT', ENDPOINT_URL
         }
 
         debug {
@@ -28,6 +29,7 @@ android {
             versionNameSuffix '-debug'
 
             buildConfigField 'String', 'SECURITY', SECURITY_TOKEN
+            buildConfigField 'String', 'ENDPOINT', ENDPOINT_URL
 
         }
     }
@@ -56,6 +58,7 @@ ext {
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
