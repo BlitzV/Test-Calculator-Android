@@ -90,7 +90,7 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/txt_operation"
+                        android:id="@+id/txt_currency2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingStart="10dp"
@@ -100,7 +100,7 @@
                         android:textSize="18sp" />
 
                     <TextView
-                        android:id="@+id/operation"
+                        android:id="@+id/txt_currency_value2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
