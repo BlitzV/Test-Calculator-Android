@@ -91,6 +91,7 @@ public class MainActivity extends AppCompatActivity {
     private SpinnerAdapter spinnerAdapterData;
     private String quantity = null;
     private int pos = 0;
+    private String finalAmount = null;
     private boolean isBadResponse = false;
 
     @Override
@@ -178,14 +179,25 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+        Calculate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(finalAmount!=null){
+                    BlankFragment bottomFragment = BlankFragment.newInstance(finalAmount.replace(",",""),pos);
+                    bottomFragment.show(getSupportFragmentManager(),bottomFragment.getTag());
+                }
+            }
+        });
     }
 
     private void CaptureQuantity() {
-        Toast.makeText(this, "si", Toast.LENGTH_SHORT).show();
 
         if (quantity != null && quantity.length() > 0) {
 
             txtTotal.setText(quantity);
+
+            finalAmount = quantity;
 
             Calculate.setEnabled(true);
 
