@@ -104,5 +104,9 @@ dependencies {
 
     // ZXING
     implementation "com.google.zxing:core:$zxingVersion"
+    implementation 'com.journeyapps:zxing-android-embedded:3.5.0'
+
+    //PLAY SERVICES GOOGLE
+    implementation 'com.google.android.gms:play-services-vision:20.1.2'
 
 }

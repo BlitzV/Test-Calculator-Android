@@ -1,10 +1,11 @@
-package com.test.chinchin.testcalculator;
+package com.test.chinchin.testcalculator.models;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
+//Api response model
 public class ApiModel {
     @SerializedName("code")
     @Expose

@@ -1,4 +1,4 @@
-package com.test.chinchin.testcalculator;
+package com.test.chinchin.testcalculator.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,32 +12,30 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.google.android.material.textfield.TextInputLayout;
 import com.google.gson.Gson;
-import com.google.gson.JsonObject;
+import com.test.chinchin.testcalculator.R;
 import com.test.chinchin.testcalculator.adapters.SpinnerAdapter;
+import com.test.chinchin.testcalculator.fragments.FragmentShowResults;
 import com.test.chinchin.testcalculator.helpers.DialogsHelper;
 import com.test.chinchin.testcalculator.helpers.FunctionsHelper;
+import com.test.chinchin.testcalculator.login.LoginActivity;
+import com.test.chinchin.testcalculator.models.ApiModel;
 import com.test.chinchin.testcalculator.preferences.PreferencesHelper;
+import com.test.chinchin.testcalculator.retrofit.EndPoints;
+import com.test.chinchin.testcalculator.root.App;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Objects;
 
 import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.observers.DisposableObserver;
@@ -45,7 +43,7 @@ import io.reactivex.schedulers.Schedulers;
 
 import static com.test.chinchin.testcalculator.helpers.ConstantsHelper.OLD_DATA_OBTAINED;
 
-public class MainActivity extends AppCompatActivity {
+public class CalculatorActivity extends AppCompatActivity {
 
     @BindView(R.id.spinner)
     AppCompatSpinner spinner;
@@ -86,9 +84,6 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.buttonClear)
     TextView buttonClear;
 
-    @BindView(R.id.buttonDot)
-    TextView buttonDot;
-
     @BindView(R.id.calculate)
     Button Calculate;
 
@@ -108,6 +103,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+
+        Objects.requireNonNull(getSupportActionBar()).setTitle(getString(R.string.calculator));
 
         App.getAppComponent().inject(this);
 
@@ -130,10 +127,7 @@ public class MainActivity extends AppCompatActivity {
                     if (quantity.indexOf(".") != (quantity.length() - 1)) {
                         quantity = FunctionsHelper.DecimalFormat(Float.valueOf(quantity.replace(",", "")));
                     }
-
-
                 }
-
                 CaptureQuantity();
             }
         };
@@ -163,7 +157,6 @@ public class MainActivity extends AppCompatActivity {
         button7.setOnClickListener(numberListener);
         button8.setOnClickListener(numberListener);
         button9.setOnClickListener(numberListener);
-        buttonDot.setOnClickListener(numberListener);
 
         buttonClear.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -193,13 +186,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(finalAmount!=null){
-                    BlankFragment bottomFragment = BlankFragment.newInstance(finalAmount.replace(",",""),pos);
+                    FragmentShowResults bottomFragment = FragmentShowResults.newInstance(finalAmount.replace(",",""),pos);
                     bottomFragment.show(getSupportFragmentManager(),bottomFragment.getTag());
                 }
             }
         });
     }
 
+    //Management of amounts captured
     private void CaptureQuantity() {
 
         if (quantity != null && quantity.length() > 0) {
@@ -242,14 +236,15 @@ public class MainActivity extends AppCompatActivity {
         SpinnerPoblate();
     }
 
+    //Filling spinner with request to endpoint and data management in case of error in connection with preferences
     public void SpinnerPoblate(){
         if(modelObject.getData()!=null && modelObject.getData().size()>4){
             spinnerAdapterData = new SpinnerAdapter(this, modelObject.getData());
             spinner.setAdapter(spinnerAdapterData);
             spinnerAdapterData.notifyDataSetChanged();
         } else {
-            if(PreferencesHelper.GetStringValue(MainActivity.this,OLD_DATA_OBTAINED)!=null){
-                modelObject = new Gson().fromJson(PreferencesHelper.GetStringValue(MainActivity.this,OLD_DATA_OBTAINED),ApiModel.class);
+            if(PreferencesHelper.GetStringValue(CalculatorActivity.this,OLD_DATA_OBTAINED)!=null){
+                modelObject = new Gson().fromJson(PreferencesHelper.GetStringValue(CalculatorActivity.this,OLD_DATA_OBTAINED),ApiModel.class);
                 spinnerAdapterData = new SpinnerAdapter(this, modelObject.getData());
                 spinner.setAdapter(spinnerAdapterData);
                 spinnerAdapterData.notifyDataSetChanged();
@@ -260,9 +255,10 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    //Error handling in endpoint
     public void ErrorApiResponse(boolean value){
         if(value){
-            DialogsHelper.ShowDialogSimpleOKAndCancelButton(MainActivity.this, getString(R.string.error_remote),
+            DialogsHelper.ShowDialogSimpleOKAndCancelButton(CalculatorActivity.this, getString(R.string.error_remote),
                     getString(R.string.message_error_remote_data), new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
@@ -278,6 +274,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    //Asynchronous request with javaRx of a get to endpoint to get the types of currency
     public ApiModel getRemoteData(){
         subscription = null;
         subscription = RetrofitProvider.CryptoInfo().subscribeOn(Schedulers.io())
@@ -286,7 +283,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onNext(ApiModel apiModels) {
                         modelObject.setData(apiModels.getData());
-                        PreferencesHelper.SetStringValue(MainActivity.this, OLD_DATA_OBTAINED, new Gson().toJson(modelObject));
+                        PreferencesHelper.SetStringValue(CalculatorActivity.this, OLD_DATA_OBTAINED, new Gson().toJson(modelObject));
                     }
 
 
@@ -311,12 +308,13 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+    //Menu Management with request for permission to the user for the use of the camera
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
             case R.id.read_qr:
                 if(ContextCompat.checkSelfPermission(this,Manifest.permission.CAMERA)==PackageManager.PERMISSION_GRANTED) {
-                    startActivity(new Intent(MainActivity.this,ReadQrActivity.class));
+                    startActivity(new Intent(CalculatorActivity.this, ReadQrActivity.class));
                 } else {
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                         requestPermissions(new String[]{Manifest.permission.CAMERA}, 22);
@@ -324,7 +322,23 @@ public class MainActivity extends AppCompatActivity {
                 }
                 return true;
 
+                //Closing session with dialogue
             case R.id.close_sesion:
+                DialogsHelper.ShowDialogSimpleOKAndCancelButton(this, getString(R.string.close_sesion),
+                        getString(R.string.close_session_message), new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                                finish();
+                                new Intent(CalculatorActivity.this, LoginActivity.class);
+                                PreferencesHelper.ClearPreferences(CalculatorActivity.this);
+                            }
+                        }, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        }).show();
                 return true;
 
             default:
@@ -338,7 +352,7 @@ public class MainActivity extends AppCompatActivity {
         switch (requestCode){
             case 22:
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    startActivity(new Intent(MainActivity.this,ReadQrActivity.class));
+                    startActivity(new Intent(CalculatorActivity.this,ReadQrActivity.class));
                 } else {
                     DialogsHelper.ShowDialogSimpleOKButton(this, getString(R.string.error_permission),
                             getString(R.string.mensaje_permission), new DialogInterface.OnClickListener() {

@@ -1,5 +1,6 @@
-package com.test.chinchin.testcalculator.login;
+package com.test.chinchin.testcalculator.models;
 
+// model for management of login
 public class LoginModel {
 
     private String Email;

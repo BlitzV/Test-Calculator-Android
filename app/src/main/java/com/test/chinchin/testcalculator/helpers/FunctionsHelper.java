@@ -9,8 +9,8 @@ import com.google.zxing.BarcodeFormat;
 import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
-import com.test.chinchin.testcalculator.ApiModel;
-import com.test.chinchin.testcalculator.Datum;
+import com.test.chinchin.testcalculator.models.ApiModel;
+import com.test.chinchin.testcalculator.models.Datum;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -24,6 +24,7 @@ import static com.test.chinchin.testcalculator.helpers.ConstantsHelper.BUNDLE_PA
 
 public class FunctionsHelper {
 
+    //function for quantity management
     public static String DecimalFormat(Float value) {
         NumberFormat formatter = NumberFormat.getNumberInstance();
         formatter.setMinimumFractionDigits(0);
@@ -31,11 +32,13 @@ public class FunctionsHelper {
         return formatter.format(value);
     }
 
+    // function for validate email
     public static boolean IsEmailInValid(String email) {
         Pattern pattern = Patterns.EMAIL_ADDRESS;
         return pattern.matcher(email).matches();
     }
 
+    // function for validate passwords
     public static Bundle IsPasswordInValid(String password) {
 
         Bundle bundle = new Bundle();
@@ -108,11 +111,13 @@ public class FunctionsHelper {
         return bundle;
     }
 
+    //function mock data
     public static ApiModel MockDataApiModel(){
         ApiModel apiModel = new ApiModel("",null,null,MockDatum(),false);
         return apiModel;
     }
 
+    //function mock data
     public static List<Datum> MockDatum() {
         Datum datum = new Datum("","","","","","",null,null,"USD",""
                 ,null,null,null,null,null,null,1234567890L,null,"","",1234567890L,null,false);
@@ -124,6 +129,7 @@ public class FunctionsHelper {
         return list;
     }
 
+    //function for create QR code
     public static Bitmap encodeAsBitmap(String str) throws WriterException {
         BitMatrix result;
         try {

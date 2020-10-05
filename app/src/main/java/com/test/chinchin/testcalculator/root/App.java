@@ -1,13 +1,17 @@
-package com.test.chinchin.testcalculator;
+package com.test.chinchin.testcalculator.root;
 
 import android.app.Application;
 import android.content.Intent;
 
+import com.test.chinchin.testcalculator.activities.CalculatorActivity;
+import com.test.chinchin.testcalculator.retrofit.RetrofitModule;
 import com.test.chinchin.testcalculator.login.LoginActivity;
 import com.test.chinchin.testcalculator.preferences.PreferencesHelper;
 
 import static com.test.chinchin.testcalculator.helpers.ConstantsHelper.SAVE_USER;
 
+//base class in the app, build of dagger injector to all app and
+//launch activities if logged in
 public class App extends Application {
 
     private static AppComponent component;
@@ -23,7 +27,7 @@ public class App extends Application {
 
 
         if(PreferencesHelper.GetStringValue(this,SAVE_USER)!=null){
-            Intent intent = new Intent(App.this, MainActivity.class);
+            Intent intent = new Intent(App.this, CalculatorActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
         } else {

@@ -1,7 +1,6 @@
 package com.test.chinchin.testcalculator.adapters;
 
 import android.content.Context;
-import android.content.pm.ApplicationInfo;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,8 +10,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.test.chinchin.testcalculator.ApiModel;
-import com.test.chinchin.testcalculator.Datum;
+import com.test.chinchin.testcalculator.models.ApiModel;
+import com.test.chinchin.testcalculator.models.Datum;
 import com.test.chinchin.testcalculator.R;
 import com.test.chinchin.testcalculator.helpers.FunctionsHelper;
 
@@ -45,6 +44,7 @@ public class SpinnerAdapter extends ArrayAdapter {
         return createItemView(position, convertView, parent);
     }
 
+    //Management with mock data in case of not getting an endpoint response
     private View createItemView(int position, View convertView, ViewGroup parent) {
         final View view = inflater.inflate(resource, parent, false);
 

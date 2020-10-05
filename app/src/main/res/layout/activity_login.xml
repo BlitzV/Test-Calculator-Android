@@ -3,21 +3,9 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@android:color/holo_blue_light"
+    android:background="@color/clear_blue"
     tools:context=".login.LoginActivity"
     xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <include
-        android:id="@+id/progress_bar"
-        layout="@layout/view_progress_bar"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/imageView3"
@@ -28,8 +16,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/money"
-        app:tint="@android:color/black" />
+        app:srcCompat="@drawable/image2" />
 
     <LinearLayout
         android:id="@+id/linearLayout2"
@@ -48,6 +35,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:hint="@string/user"
+            android:theme="@style/DialogTheme"
             app:errorEnabled="true"
             app:hintAnimationEnabled="true">
 
@@ -67,6 +55,7 @@
             android:id="@+id/txtInputPassword"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:theme="@style/DialogTheme"
             android:hint="@string/password"
             app:errorEnabled="true"
             app:hintAnimationEnabled="true"
@@ -93,7 +82,7 @@
         android:background="@drawable/btn_blue_design"
         android:elevation="8dp"
         android:text="@string/btn_login"
-        android:textColor="@android:color/black"
+        android:textColor="@android:color/white"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"

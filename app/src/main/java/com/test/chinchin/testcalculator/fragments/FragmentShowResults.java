@@ -1,10 +1,6 @@
-package com.test.chinchin.testcalculator;
+package com.test.chinchin.testcalculator.fragments;
 
-import android.content.DialogInterface;
-import android.graphics.Bitmap;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,16 +8,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.google.android.material.bottomsheet.BottomSheetBehavior;
-import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.gson.Gson;
-import com.google.zxing.BarcodeFormat;
-import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
-import com.google.zxing.common.BitMatrix;
+import com.test.chinchin.testcalculator.R;
 import com.test.chinchin.testcalculator.helpers.ConstantsHelper;
-import com.test.chinchin.testcalculator.preferences.PreferencesHelper;
+import com.test.chinchin.testcalculator.models.CurrencyModel;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -30,7 +22,7 @@ import static com.test.chinchin.testcalculator.helpers.ConstantsHelper.USD;
 import static com.test.chinchin.testcalculator.helpers.FunctionsHelper.DecimalFormat;
 import static com.test.chinchin.testcalculator.helpers.FunctionsHelper.encodeAsBitmap;
 
-public class BlankFragment extends BottomSheetDialogFragment {
+public class FragmentShowResults extends BottomSheetDialogFragment {
 
     @BindView(R.id.qr_image)
     ImageView QrImage;
@@ -66,12 +58,12 @@ public class BlankFragment extends BottomSheetDialogFragment {
     private String PTR;
     private String BS;
 
-    public BlankFragment() {
+    public FragmentShowResults() {
         // Required empty public constructor
     }
 
-    public static BlankFragment newInstance(String param1, int spinnerPosition) {
-        BlankFragment fragment = new BlankFragment();
+    public static FragmentShowResults newInstance(String param1, int spinnerPosition) {
+        FragmentShowResults fragment = new FragmentShowResults();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putInt(ARG_PARAM2,spinnerPosition);
@@ -103,7 +95,6 @@ public class BlankFragment extends BottomSheetDialogFragment {
             @Override
             public void onClick(View v) {
                 dismiss();
-                //ACTION
             }
         });
 
@@ -118,12 +109,15 @@ public class BlankFragment extends BottomSheetDialogFragment {
         return view;
     }
 
+    //Function of calculation of introduced values and QR creation
     private void CalculateValues() {
         if(mParam1!=null && mParam2 > -1){
 
-            int valueToCalulate = Integer.parseInt(mParam1);
+            long valueToCalulate = Integer.parseInt(mParam1);
 
             title_fragment.setText(mParam1.concat(" ").concat(USD));
+
+            String titletosave = mParam1.concat(" ").concat(USD);
 
             PTR = String.valueOf(valueToCalulate * 60);
             BS = String.valueOf(valueToCalulate * 100000);
@@ -138,10 +132,11 @@ public class BlankFragment extends BottomSheetDialogFragment {
 
             txtCurrencyValue2.setText(BS);
 
-            currencyModel = new CurrencyModel(ConstantsHelper.PTR, ConstantsHelper.BS, PTR, BS);
+            currencyModel = new CurrencyModel(titletosave,ConstantsHelper.PTR, ConstantsHelper.BS, PTR, BS);
 
             try {
                 QrImage.setImageBitmap(encodeAsBitmap(new Gson().toJson(currencyModel)));
+
             } catch (WriterException e) {
                 e.printStackTrace();
             }

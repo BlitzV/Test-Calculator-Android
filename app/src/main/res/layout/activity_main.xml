@@ -3,19 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@color/clear_blue"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
-
-    <include
-        android:id="@+id/include_progress_bar"
-        layout="@layout/view_progress_bar"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    tools:context=".activities.CalculatorActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -32,7 +22,8 @@
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
             android:text="@string/insert_information"
-            android:textSize="18sp"
+            android:textSize="20sp"
+            android:textColor="@android:color/black"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/spinner"
             app:layout_constraintEnd_toEndOf="parent"
@@ -41,8 +32,8 @@
         <ImageView
             android:layout_width="200dp"
             android:layout_height="200dp"
-            android:background="@android:drawable/ic_input_get"
-            android:visibility="gone"
+            android:background="@drawable/image"
+            android:visibility="visible"
             app:layout_constraintBottom_toTopOf="@+id/textView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -97,16 +88,16 @@
     <Button
         android:id="@+id/calculate"
         style="?android:textAppearanceSmall"
-        android:layout_width="match_parent"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:background="@drawable/btn_blue_design"
         android:ellipsize="marquee"
-        android:layout_marginEnd="12dp"
-        android:layout_marginStart="12dp"
+        android:layout_marginEnd="25dp"
+        android:layout_marginStart="25dp"
         android:padding="8dp"
         android:text="@string/action_calculate"
-        android:textColor="@android:color/black"
+        android:textColor="@android:color/white"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
@@ -121,20 +112,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
-
-        <TextView
-            android:id="@+id/buttonDot"
-            android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:background="@drawable/background_rectangle_fill_white_blue_gradient"
-            android:gravity="center"
-            android:text="."
-            android:textAlignment="center"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            app:layout_constraintBaseline_toBaselineOf="@+id/button0"
-            app:layout_constraintEnd_toEndOf="@+id/button9"
-            app:layout_constraintStart_toStartOf="@+id/button9" />
 
         <TextView
             android:id="@+id/button0"
