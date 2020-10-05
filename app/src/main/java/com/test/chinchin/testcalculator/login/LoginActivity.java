@@ -7,17 +7,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.EditText;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.gson.Gson;
 import com.test.chinchin.testcalculator.BuildConfig;
-import com.test.chinchin.testcalculator.MainActivity;
+import com.test.chinchin.testcalculator.activities.CalculatorActivity;
 import com.test.chinchin.testcalculator.R;
 import com.test.chinchin.testcalculator.helpers.DialogsHelper;
+import com.test.chinchin.testcalculator.models.LoginModel;
 import com.test.chinchin.testcalculator.preferences.PreferencesHelper;
 
 import java.util.Objects;
@@ -58,6 +57,8 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
+        Objects.requireNonNull(getSupportActionBar()).setTitle(getString(R.string.login));
+
         signIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -154,7 +155,7 @@ public class LoginActivity extends AppCompatActivity {
         if (loginModel != null) {
             PreferencesHelper.SetStringValue(LoginActivity.this,SAVE_USER, gson.toJson(loginModel));
             finish();
-            startActivity(new Intent(LoginActivity.this, MainActivity.class));
+            startActivity(new Intent(LoginActivity.this, CalculatorActivity.class));
         } else {
             DialogsHelper.ShowDialogSimpleOKButton(LoginActivity.this, getString(R.string.error_save),
                     getString(R.string.try_again), new DialogInterface.OnClickListener() {

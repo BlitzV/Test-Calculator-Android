@@ -1,4 +1,4 @@
-package com.test.chinchin.testcalculator.login;
+package com.test.chinchin.testcalculator.models;
 
 public class LoginModel {
 

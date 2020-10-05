@@ -38,4 +38,9 @@
     <string name="error_permission">error de permiso</string>
     <string name="mensaje_permission">Debe aceptar el permiso para continuar con esta accion</string>
     <string name="action_recalculate">Recalcular</string>
+    <string name="calculator">Calculadora</string>
+    <string name="login">Inicio de sesion</string>
+    <string name="read_qr">Lector QR</string>
+    <string name="close_sesion">Cerrar Sesion</string>
+    <string name="close_session_message">¿Esta seguro que desea cerrar sesion?</string>
 </resources>

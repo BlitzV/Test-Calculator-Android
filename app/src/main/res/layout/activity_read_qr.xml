@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.test.chinchin.testcalculator.ReadQrActivity">
+    android:background="@color/clear_blue"
+    tools:context="com.test.chinchin.testcalculator.activities.ReadQrActivity">
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -112,7 +113,7 @@
         android:ellipsize="marquee"
         android:padding="8dp"
         android:text="@string/action_recalculate"
-        android:textColor="@android:color/black"
+        android:textColor="@android:color/white"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"

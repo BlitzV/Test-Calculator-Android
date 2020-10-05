@@ -1,8 +1,10 @@
-package com.test.chinchin.testcalculator;
+package com.test.chinchin.testcalculator.root;
 
 import android.app.Application;
 import android.content.Intent;
 
+import com.test.chinchin.testcalculator.activities.CalculatorActivity;
+import com.test.chinchin.testcalculator.retrofit.RetrofitModule;
 import com.test.chinchin.testcalculator.login.LoginActivity;
 import com.test.chinchin.testcalculator.preferences.PreferencesHelper;
 
@@ -23,7 +25,7 @@ public class App extends Application {
 
 
         if(PreferencesHelper.GetStringValue(this,SAVE_USER)!=null){
-            Intent intent = new Intent(App.this, MainActivity.class);
+            Intent intent = new Intent(App.this, CalculatorActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
         } else {

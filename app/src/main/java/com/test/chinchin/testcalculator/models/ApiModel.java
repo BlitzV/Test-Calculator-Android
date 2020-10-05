@@ -1,4 +1,4 @@
-package com.test.chinchin.testcalculator;
+package com.test.chinchin.testcalculator.models;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

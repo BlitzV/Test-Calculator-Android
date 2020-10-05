@@ -9,8 +9,8 @@ import com.google.zxing.BarcodeFormat;
 import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
-import com.test.chinchin.testcalculator.ApiModel;
-import com.test.chinchin.testcalculator.Datum;
+import com.test.chinchin.testcalculator.models.ApiModel;
+import com.test.chinchin.testcalculator.models.Datum;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package com.test.chinchin.testcalculator;
+package com.test.chinchin.testcalculator.models;
 
 public class CurrencyModel {
 

@@ -11,5 +11,8 @@ public class ConstantsHelper {
     public static final String BS = "BS";
     public static final String SAVE_LIST_QR = "QR";
 
+    public static final int MY_PERMISSIONS_REQUEST_CAMERA = 1;
+
+
 
 }

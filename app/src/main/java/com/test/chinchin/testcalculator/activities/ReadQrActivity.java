@@ -1,48 +1,38 @@
-package com.test.chinchin.testcalculator;
+package com.test.chinchin.testcalculator.activities;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
-import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
-import android.util.Log;
 import android.util.SparseArray;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
-import android.webkit.URLUtil;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.vision.CameraSource;
 import com.google.android.gms.vision.Detector;
 import com.google.android.gms.vision.barcode.Barcode;
 import com.google.android.gms.vision.barcode.BarcodeDetector;
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import com.google.zxing.integration.android.IntentIntegrator;
-import com.google.zxing.integration.android.IntentResult;
-import com.test.chinchin.testcalculator.preferences.PreferencesHelper;
+import com.test.chinchin.testcalculator.R;
+import com.test.chinchin.testcalculator.models.CurrencyModel;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-import static com.test.chinchin.testcalculator.helpers.ConstantsHelper.SAVE_LIST_QR;
+import static com.test.chinchin.testcalculator.helpers.ConstantsHelper.MY_PERMISSIONS_REQUEST_CAMERA;
 
 public class ReadQrActivity extends AppCompatActivity {
 
@@ -68,7 +58,6 @@ public class ReadQrActivity extends AppCompatActivity {
     Button recalculate;
 
     private CameraSource cameraSource;
-    private final int MY_PERMISSIONS_REQUEST_CAMERA = 1;
     private String token = "";
     private CurrencyModel currencyModel;
 
@@ -98,6 +87,8 @@ public class ReadQrActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_read_qr);
+
+        Objects.requireNonNull(getSupportActionBar()).setTitle(getString(R.string.read_qr));
 
         ButterKnife.bind(this);
 
@@ -181,5 +172,11 @@ public class ReadQrActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
     }
 }
