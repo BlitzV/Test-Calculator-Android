@@ -32,7 +32,7 @@
         <ImageView
             android:layout_width="200dp"
             android:layout_height="200dp"
-            android:background="@android:drawable/ic_input_get"
+            android:background="@drawable/image"
             android:visibility="visible"
             app:layout_constraintBottom_toTopOf="@+id/textView"
             app:layout_constraintEnd_toEndOf="parent"
