@@ -7,4 +7,21 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <!--DIALOG THEME-->
+    <style name="DialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
+
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textColorPrimary">@android:color/black</item>
+
+    </style>
+
+    <!--BOTTOM FRAGMENT STYLE-->
+    <style name="BackgroundBottomFragmentTransparentTheme" parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/BackgroundBottomFragmentTransparent</item>
+    </style>
+
+    <style name="BackgroundBottomFragmentTransparent" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+
 </resources>
