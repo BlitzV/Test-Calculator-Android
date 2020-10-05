@@ -5,6 +5,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
+// Api model response
 public class Datum {
     @SerializedName("s")
     @Expose

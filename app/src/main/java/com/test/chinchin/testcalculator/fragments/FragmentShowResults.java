@@ -109,6 +109,7 @@ public class FragmentShowResults extends BottomSheetDialogFragment {
         return view;
     }
 
+    //Function of calculation of introduced values and QR creation
     private void CalculateValues() {
         if(mParam1!=null && mParam2 > -1){
 

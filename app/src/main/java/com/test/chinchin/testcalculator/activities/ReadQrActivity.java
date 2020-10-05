@@ -61,6 +61,7 @@ public class ReadQrActivity extends AppCompatActivity {
     private String token = "";
     private CurrencyModel currencyModel;
 
+    //data handling obtained by the QR code
     Handler handler = new Handler(Looper.getMainLooper()){
         @Override
         public void handleMessage(@NonNull Message msg) {
@@ -104,6 +105,7 @@ public class ReadQrActivity extends AppCompatActivity {
 
     }
 
+    //QR code reading method
     public void initQR() {
 
         BarcodeDetector barcodeDetector =

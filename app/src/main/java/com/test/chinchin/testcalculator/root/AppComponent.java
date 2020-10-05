@@ -7,6 +7,7 @@ import javax.inject.Singleton;
 
 import dagger.Component;
 
+//Dagger component
 @Singleton
 @Component(modules = {AppModule.class,
         RetrofitModule.class})

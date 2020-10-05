@@ -10,6 +10,8 @@ import com.test.chinchin.testcalculator.preferences.PreferencesHelper;
 
 import static com.test.chinchin.testcalculator.helpers.ConstantsHelper.SAVE_USER;
 
+//base class in the app, build of dagger injector to all app and
+//launch activities if logged in
 public class App extends Application {
 
     private static AppComponent component;

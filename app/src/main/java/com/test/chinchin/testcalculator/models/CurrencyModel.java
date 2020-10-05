@@ -1,5 +1,6 @@
 package com.test.chinchin.testcalculator.models;
 
+//model for management of QR data
 public class CurrencyModel {
 
     private String InitValue;

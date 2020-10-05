@@ -44,6 +44,7 @@ public class SpinnerAdapter extends ArrayAdapter {
         return createItemView(position, convertView, parent);
     }
 
+    //Management with mock data in case of not getting an endpoint response
     private View createItemView(int position, View convertView, ViewGroup parent) {
         final View view = inflater.inflate(resource, parent, false);
 

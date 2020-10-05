@@ -3,8 +3,7 @@ package com.test.chinchin.testcalculator.preferences;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.google.gson.Gson;
-
+//class to help with the preferences in the app
 public class PreferencesHelper {
 
     private static final String PREFERENCES = "preferences";

@@ -8,6 +8,7 @@ import com.test.chinchin.testcalculator.R;
 
 public class DialogsHelper {
 
+    //class to help create dialogues
     public static AlertDialog ShowDialogSimpleOKButton(Context context, String title, String msg,
                                                        DialogInterface.OnClickListener positiveOnClick) {
 

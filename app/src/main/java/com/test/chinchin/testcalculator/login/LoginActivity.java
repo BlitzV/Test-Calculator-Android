@@ -1,9 +1,14 @@
 package com.test.chinchin.testcalculator.login;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -63,6 +68,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                //validate user input
                 if (!IsEmailInValid(Objects.requireNonNull(email.getText()).toString())) {
                     InputError(0);
                     return;
@@ -93,6 +99,7 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
+    //Errors management
     public void InputError(int errorCase) {
 
         errorEmailField.setError(null);
@@ -151,11 +158,20 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
+    //function to continue with the flow in the application
+    //request permission of use internet
     public void SuccessfullLogin(LoginModel loginModel){
         if (loginModel != null) {
-            PreferencesHelper.SetStringValue(LoginActivity.this,SAVE_USER, gson.toJson(loginModel));
-            finish();
-            startActivity(new Intent(LoginActivity.this, CalculatorActivity.class));
+            if(ContextCompat.checkSelfPermission(this, Manifest.permission.INTERNET)== PackageManager.PERMISSION_GRANTED) {
+                PreferencesHelper.SetStringValue(LoginActivity.this,SAVE_USER, gson.toJson(loginModel));
+                finish();
+                startActivity(new Intent(LoginActivity.this, CalculatorActivity.class));
+            } else {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    requestPermissions(new String[]{Manifest.permission.INTERNET}, 23);
+                }
+            }
+
         } else {
             DialogsHelper.ShowDialogSimpleOKButton(LoginActivity.this, getString(R.string.error_save),
                     getString(R.string.try_again), new DialogInterface.OnClickListener() {
@@ -164,6 +180,28 @@ public class LoginActivity extends AppCompatActivity {
                             dialog.dismiss();
                         }
                     }).show();
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode){
+            case 23:
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    PreferencesHelper.SetStringValue(LoginActivity.this,SAVE_USER, gson.toJson(loginModel));
+                    finish();
+                    startActivity(new Intent(LoginActivity.this, CalculatorActivity.class));
+                } else {
+                    DialogsHelper.ShowDialogSimpleOKButton(this, getString(R.string.error_permission),
+                            getString(R.string.mensaje_permission), new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                }
+                            }).show();
+                }
+                return;
         }
     }
 }

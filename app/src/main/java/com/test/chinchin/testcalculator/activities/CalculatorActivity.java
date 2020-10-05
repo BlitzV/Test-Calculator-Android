@@ -193,6 +193,7 @@ public class CalculatorActivity extends AppCompatActivity {
         });
     }
 
+    //Management of amounts captured
     private void CaptureQuantity() {
 
         if (quantity != null && quantity.length() > 0) {
@@ -235,6 +236,7 @@ public class CalculatorActivity extends AppCompatActivity {
         SpinnerPoblate();
     }
 
+    //Filling spinner with request to endpoint and data management in case of error in connection with preferences
     public void SpinnerPoblate(){
         if(modelObject.getData()!=null && modelObject.getData().size()>4){
             spinnerAdapterData = new SpinnerAdapter(this, modelObject.getData());
@@ -253,6 +255,7 @@ public class CalculatorActivity extends AppCompatActivity {
         }
     }
 
+    //Error handling in endpoint
     public void ErrorApiResponse(boolean value){
         if(value){
             DialogsHelper.ShowDialogSimpleOKAndCancelButton(CalculatorActivity.this, getString(R.string.error_remote),
@@ -271,6 +274,7 @@ public class CalculatorActivity extends AppCompatActivity {
         }
     }
 
+    //Asynchronous request with javaRx of a get to endpoint to get the types of currency
     public ApiModel getRemoteData(){
         subscription = null;
         subscription = RetrofitProvider.CryptoInfo().subscribeOn(Schedulers.io())
@@ -304,6 +308,7 @@ public class CalculatorActivity extends AppCompatActivity {
         return true;
     }
 
+    //Menu Management with request for permission to the user for the use of the camera
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
@@ -317,6 +322,7 @@ public class CalculatorActivity extends AppCompatActivity {
                 }
                 return true;
 
+                //Closing session with dialogue
             case R.id.close_sesion:
                 DialogsHelper.ShowDialogSimpleOKAndCancelButton(this, getString(R.string.close_sesion),
                         getString(R.string.close_session_message), new DialogInterface.OnClickListener() {
